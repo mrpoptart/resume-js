@@ -1,0 +1,13 @@
+{
+    "name": "http-server",
+    "preferGlobal": false,
+    "version": "0.1.0",
+    "author": "Morgan Engel <morganengel@gmail.com>",
+    "description": "a resume in js",
+    "dependencies" : {
+        "node-minify"   :  "*"
+    },
+    "engines": {
+        "node": ">=0.6"
+    }
+}
