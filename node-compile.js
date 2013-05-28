@@ -5,7 +5,8 @@ var source = [];
 function minify(type)
 {
     fs.readFile('resume.js', "utf8", function(err, data){
-        var data = data.replace(/".+?"/g, function(str){
+        data = data.replace(/"\s*\+\s*\n\s*"/g,"");
+        data = data.replace(/".+?"/g, function(str){
             str=str.slice(1,-1);
             var strArray = str.split("");
             for(var l=0; l<strArray.length; l++)
@@ -19,17 +20,18 @@ function minify(type)
                 {
                     source.push(ltr);
                 }
-                strArray[l] = source.indexOf(ltr).toString(36);
+                strArray[l] = (source.indexOf(ltr)+3).toString(36);
             }
             return "decode('"+strArray.join("")+"')";
         });
-        data=data.replace("replaceableSource", "\""+source.join('')+"\"");
-        console.log(data);
-        fs.writeFile('resume-tmp.js', data, function(err){
+        //need to pad this by as many spaces
+        data=data.replace("replaceableSource", "\"###"+source.join('')+"\"");
+        fs.writeFile('bin/resume-tmp.js', data, function(err){
+            var fileout = 'bin/resume-min-'+type+'.js';
             new compressor.minify({
                 type: type,
-                fileIn: 'resume-tmp.js',
-                fileOut: 'resume-min-'+type+'.js',
+                fileIn: 'bin/resume-tmp.js',
+                fileOut: fileout,
                 callback: function(err){
                     if(err)
                     {
@@ -37,7 +39,7 @@ function minify(type)
                     }
                     else
                     {
-                        console.log(this.type + " successfully compiled.");
+                        console.log(this.type + " successfully compiled to " +fileout+".");
                     }
                 }
             });

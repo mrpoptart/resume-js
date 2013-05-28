@@ -1,4 +1,3 @@
-```
 +-----------------------------------------------------------------------------+
 |                            Morgan Engel's Resume                            |
 |                                805-215-2170                                 |
@@ -87,5 +86,4 @@ The Pickleball Store                                          Mar 2006-Dec 2011
 ----------------------------------- Founder -----------------------------------
 Conceived, sourced funding for, and built an online store in a niche market. 
 Monitored stock levels, profit margins, and budgets while increasing sales 200% 
-per year until sold in 2011. 
-```
+per year until sold in 2011.
