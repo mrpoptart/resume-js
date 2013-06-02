@@ -85,7 +85,7 @@
         ret+=paragraph(title, description);
         return ret;
     }
-    console&&console.log("\n"+"Morgan Engel's Resume\n805-215-2170\nmorganengel@gmail.com\nhttp://www.morganengel.com".box() + "\n\n"
+    console&&console.log("\nMorgan Engel's Resume\n805-215-2170\nmorganengel@gmail.com\nhttp://www.morganengel.com".box() + "\n\n"
         +header("Generic Cover Letter")
         +paragraph("TL;DR:",
         "I try to be the kind of programmer I would choose for my own team. I self-start and learn well. I " +
