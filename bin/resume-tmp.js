@@ -10,10 +10,24 @@
             {
                 ltr += strArray.splice(i+1,1);
             }
-            strArray[i] = "###\nMorgan Eel'sRum805-217@i.chtp:/wGCvLT;DIybkdfz,WAjqYxBNOZF4PHSV93%J6".charAt(parseInt(ltr,36));
+            strArray[i] = "###\nMorgan Eel'sRum805-217@i.chtp:/wGCvLT;DIybkdfz,WAjqYxBNOZF4PHSV93%J6KQX".charAt(parseInt(ltr,36));
         }
         return strArray.join('');
     }
+
+	String.prototype.pad = function (count, pre, symbol) {
+		symbol = symbol || " ";
+		pre = pre && true;
+		var txt = '';
+		while ((this + txt).length < count) {
+			txt += symbol;
+		}
+		if (pre) {
+			return txt + this;
+		} else {
+			return this + txt;
+		}
+	};
     String.prototype.center = function(symbol,txt)
     {
         symbol=symbol||" ";
@@ -26,7 +40,7 @@
     };
     String.prototype.box = function(txt)
     {
-        txt ="+" + bar("-").slice(1,-1) + "+\n",
+        var txt="+" + bar("-").slice(1,-1) + "+\n",
             textArray = this.split("\n");
         while(textArray.length)
         {
@@ -62,7 +76,7 @@
     {
         txtArray = txt.split(" ");
         txt=line='';
-        while(txtArray.length)
+        while(txtArray.length>0)
         {
             tmp=txtArray.shift();
             if(line.length+tmp.length>wid)
@@ -78,14 +92,41 @@
         }
         return title.center("-")+"\n"+txt+line+decode('33');
     }
-    function job(company, startDate, endDate, title, description, ret)
-    {
-        ret = bar('-')+"\n";
-        ret+=separate(company, startDate+"-"+endDate)+"\n";
-        ret+=paragraph(title, description);
-        return ret;
-    }
-    console&&console.log(decode('3456789ab97cdefagcfhic3jklmnolmnopk3i56789c97cdq7i8rdst5i3uvvwxyyzzzsi56789c97cdst5i').box() + decode('33')
+
+	function job(company, startDate, endDate, title, description) {
+		var ret = bar('-') + "\n";
+		ret += separate(company, startDate + "-" + endDate) + "\n";
+		ret += paragraph(title, description);
+		return ret;
+	}
+
+	function columns(number, textArray, i) {
+		textArray.sort();
+		var colWidths = "".pad(number).split('');
+		for (i = 0; i < textArray.length; i ++)
+		{
+			if(textArray[i].length > colWidths[i % number])
+			{
+				colWidths[i % number] = textArray[i].length;
+			}
+		}
+		var ret="";
+		//for each row
+		for(i = 0; i<textArray.length; i += number )
+		{
+			var row = "";
+			//for each column
+			for(var j = i; j<i+number && j<textArray.length; j++)
+			{
+				var count = colWidths[j % number];
+				row+= textArray[j].pad(count, false) + " | ";
+			}
+			ret += row.slice(0,-3)+"\n";
+		}
+		return ret+"\n";
+	}
+    var wid = 79,
+        ret=decode('456789ab97cdefagcfhic3jklmnolmnopk3i56789c97cdq7i8rdst5i3uvvwxyyzzzsi56789c97cdst5i').box() + decode('33')
         +header(decode('10c9c6rta11512c6a13cvvc6'))
         +paragraph(decode('14131516gx'),
         decode('17av618av5a19cavuca1ar91ba51caw65768iic6a17az5hd1batu55fca1c56ai18a5z9avc8isa17afcd1cmfv86va891badc869azcddsa17a6c8dr1dcavu8vat56w568vcathdvh6carfa59d18a8fa7551ba8favucawd8tca185hai81acarv1ea891ba17az89vav5ai81acarva8zcf5icsa17az89vav5a1accwa765zr97azrvuafhww56va1c65iafi86vawc5wdc1ea891ba17az89vav5at5icav5az561aac12c618a1b818azrvuac87c6au5wcar9ai18auc86vs'))
@@ -114,5 +155,11 @@
         +job(decode('14uca1rrt1adc198dda1tv56c'),
         decode('486ankk1z'),decode('16ctankoo'),
         decode('1p5h91bc6'),
-        decode('1159tcr12c1b1eaf5h6tc1ba1ch91br97a1c561ea891ba19hrdva89a59dr9cafv56car9a8a9rtucai861acvsa459rv56c1bafv5t1aadc12cdf1eaw651crvai867r9f1ea891ba19h1b7cvfazurdcar9t6c8fr97af8dcfankk1xawc6a18c86ah9vrdaf5d1bar9ankoos')));
+        decode('1159tcr12c1b1eaf5h6tc1ba1ch91br97a1c561ea891ba19hrdva89a59dr9cafv56car9a8a9rtucai861acvsa459rv56c1bafv5t1aadc12cdf1eaw651crvai867r9f1ea891ba19h1b7cvfazurdcar9t6c8fr97af8dcfankk1xawc6a18c86ah9vrdaf5d1bar9ankoos'))
+		+header(decode('13897h87cfa2095z9')) 
+		+columns(9, [decode('951bcs1hf'), decode('1h8128ft6rwv'), decode('1h21hc618'), "CSS", decode('1s14413'), "AS2", "AS3", decode('1r18vu59'), "PHP", decode('41j1t2113'), decode('422413'), decode('1y1t1p13')])
+		+header(decode('1r65768ifa2095z9')) 
+		+columns(5, [decode('1g1b519ca1ru5v5fu5w'), decode('1g1b519ca1pd8fu'), decode('1g1b519ca17ddhfv68v56'), decode('btdrwfc'), decode('41ta1n1c1crtc'), decode('179vcddr1ya171bc8'), "OSX", decode('1fr91b5zf'), decode('13r9h1ky131g41r'), decode('41j1t2113'), decode('422413'), decode('1y1t1p13')]);
+	console.log(ret)
+	
 })()

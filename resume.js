@@ -14,6 +14,20 @@
         }
         return strArray.join('');
     }
+
+	String.prototype.pad = function (count, pre, symbol) {
+		symbol = symbol || " ";
+		pre = pre && true;
+		var txt = '';
+		while ((this + txt).length < count) {
+			txt += symbol;
+		}
+		if (pre) {
+			return txt + this;
+		} else {
+			return this + txt;
+		}
+	};
     String.prototype.center = function(symbol,txt)
     {
         symbol=symbol||" ";
@@ -26,7 +40,7 @@
     };
     String.prototype.box = function(txt)
     {
-        txt ="+" + bar("-").slice(1,-1) + "+\n",
+        var txt="+" + bar("-").slice(1,-1) + "+\n",
             textArray = this.split("\n");
         while(textArray.length)
         {
@@ -62,7 +76,7 @@
     {
         txtArray = txt.split(" ");
         txt=line='';
-        while(txtArray.length)
+        while(txtArray.length>0)
         {
             tmp=txtArray.shift();
             if(line.length+tmp.length>wid)
@@ -78,14 +92,41 @@
         }
         return title.center("-")+"\n"+txt+line+"\n\n";
     }
-    function job(company, startDate, endDate, title, description, ret)
-    {
-        ret = bar('-')+"\n";
-        ret+=separate(company, startDate+"-"+endDate)+"\n";
-        ret+=paragraph(title, description);
-        return ret;
-    }
-    console&&console.log("\nMorgan Engel's Resume\n805-215-2170\nmorganengel@gmail.com\nhttp://www.morganengel.com".box() + "\n\n"
+
+	function job(company, startDate, endDate, title, description) {
+		var ret = bar('-') + "\n";
+		ret += separate(company, startDate + "-" + endDate) + "\n";
+		ret += paragraph(title, description);
+		return ret;
+	}
+
+	function columns(number, textArray, i) {
+		textArray.sort();
+		var colWidths = "".pad(number).split('');
+		for (i = 0; i < textArray.length; i ++)
+		{
+			if(textArray[i].length > colWidths[i % number])
+			{
+				colWidths[i % number] = textArray[i].length;
+			}
+		}
+		var ret="";
+		//for each row
+		for(i = 0; i<textArray.length; i += number )
+		{
+			var row = "";
+			//for each column
+			for(var j = i; j<i+number && j<textArray.length; j++)
+			{
+				var count = colWidths[j % number];
+				row+= textArray[j].pad(count, false) + " | ";
+			}
+			ret += row.slice(0,-3)+"\n";
+		}
+		return ret+"\n";
+	}
+    var wid = 79,
+        ret="Morgan Engel's Resume\n805-215-2170\nmorganengel@gmail.com\nhttp://www.morganengel.com".box() + "\n\n"
         +header("Generic Cover Letter")
         +paragraph("TL;DR:",
         "I try to be the kind of programmer I would choose for my own team. I self-start and learn well. I " +
@@ -145,5 +186,11 @@
         "Mar 2006","Dec 2011",
         "Founder",
         "Conceived, sourced funding for, and built an online store in a niche market. Monitored stock levels, " +
-            "profit margins, and budgets while increasing sales 200% per year until sold in 2011."));
+            "profit margins, and budgets while increasing sales 200% per year until sold in 2011.")
+		+header("Languages Known") 
+		+columns(9, ["node.js", "javascript", "jQuery", "CSS", "HTML", "AS2", "AS3", "Python", "PHP", "MYSQL", "MXML", "JSFL"])
+		+header("Programs Known") 
+		+columns(5, ["Adobe Photoshop", "Adobe Flash", "Adobe Illustrator", "Eclipse", "MS Office", "IntelliJ Idea", "OSX", "Windows", "Linux/LAMP", "MYSQL", "MXML", "JSFL"]);
+	console.log(ret)
+	
 })()
