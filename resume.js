@@ -101,11 +101,12 @@
 	}
 
 	/**
-	 *
-	 * @param number
-	 * @param textArray
+	 * Outputs the array of strings provided into the number of columns
+	 * provided
+	 * @param number the number of columns into which to organize the data
+	 * @param textArray an array of strings to place into columns
 	 * @param i placeholder for used var
-	 * @return {String}
+	 * @return {String} returns a formatted string
 	 */
 	function columns(number, textArray, i, j, ret) {
 		textArray.sort();
@@ -132,8 +133,54 @@
 		}
 		return ret+"\n";
 	}
-    console.log("The Resume of Morgan Engel\n805-215-2170\nmorganengel@gmail.com\nhttp://www.morganengel.com".box() + "\n\n"
-        +header("Generic Cover Letter")
+    console.log(
+			("    __  ___                                ______                 __\n" +
+			"   /  |/  /___  _________ _____ _____     / ____/___  ____ ____  / /\n" +
+			"  / /|_/ / __ \\/ ___/ __ `/ __ `/ __ \\   / __/ / __ \\/ __ `/ _ \\/ / \n" +
+			" / /  / / /_/ / /  / /_/ / /_/ / / / /  / /___/ / / / /_/ /  __/ /  \n" +
+			"/_/  /_/\\____/_/   \\__, /\\__,_/_/ /_/  /_____/_/ /_/\\__, /\\___/_/   \n" +
+			"                  /____/                           /____/           \n" +
+			"\nSenior Full-Stack Web Programmer\n805-215-2170\nmorganengel@gmail.com\nhttp://www.morganengel.com").box() + "\n\n"
+        +header("Work History")
+        +job("Say Media/VideoEgg",
+        "Oct 2009","Present",
+        "Lead Engineer",
+        "Pioneered the creation and maintenance of many internal tools, boosting user productivity 300%. " +
+            "Produced extensible ad framework in Actionscript allowing for higher-dollar sales. Lead a team " +
+            "of four and consistently delivered products on schedule while innovating new ideas constantly. " +
+            "Developed, documented, and evangelized best practices where none existed. Pioneered the adoption " +
+            "of HTML5 and provided best practice recommendations both internally and for customers.")
+        +job("EVEO, Inc.",
+        "Feb 2008",
+        "Oct 2009",
+        "Senior Developer",
+        "Aided in the conceptualization and execution of all facets of Flash and Flex development. Aided as " +
+            "many as 8 people working on diverse projects. Developed good practice and process improvements " +
+            "for a growing company. Met deadlines and consistently produced accurate estimates.")
+        +job("WordsWorth Desktop Publishing",
+        "Jan 2002","Dec 2008",
+        "Founder/Owner",
+        "Oversaw and aided in the creation of new websites, newsletters, brochures, graphics, manuals, and " +
+            "more. Managed up to five people at once to produce consistent, well-organized data for websites " +
+            "and manuals. Specialized in Excel programming, technical writing, and the documentation of complicated " +
+			"technical concepts.")
+        +job("The Pickleball Store",
+        "Mar 2006","Dec 2011",
+        "Founder",
+        "Conceived, sourced funding for, and built an online store in a niche market. Monitored stock levels, " +
+            "profit margins, and budgets while increasing sales 200% per year until sold in 2011.")
+		+header("Languages Known") 
+		+columns(9, ["node.js", "javascript", "jQuery", "CSS", "HTML", "AS2", "AS3", "Python", "PHP", "MYSQL", "MXML", "JSFL"])
+		+header("Programs Known") 
+		+columns(5, ["Adobe Photoshop", "Adobe Flash", "Adobe Illustrator", "Eclipse", "MS Office", "IntelliJ Idea", "OSX", "Windows", "Linux/LAMP", "MYSQL", "MXML", "JSFL"])
+		+header("Side Projects")
+		+paragraph("Gallerus","http://gallerus.com\n" +
+			"A site to share galleries with multiple contributors. Written in Node.js using Forever, Express, and Jade with a MYSQL backend. Multiple instances hosted on DigitalOcean Debian.")
+		+paragraph("Gamify","http://gamify.morganengel.com\n" +
+			"A system to keep track of goals and rewards to boost productivity. Built in PHP/CodeIgniter with an Apache Host and MYSQL backend. Hosted on a private server.")
+		+header("Hobbies")
+		+columns(6, ["Woodworking", "Classic Cars", "Travel", "Crossfit", "Cooking", "Writing" ])
+        +header("Cover Letter")
         +paragraph("TL;DR:",
         "I try to be the kind of programmer I would choose for my own team. I self-start and learn well. I " +
             "realize that corporate culture is only as good as the place you make it, and I want to make it " +
@@ -166,37 +213,6 @@
             "day with a smile on my face. I want to stay late because I believe in doing good work and because " +
             "I really got into the groove at 4 PM. All of the other usual things apply here, too, like " +
             "health care, a decent business plan, vision for the future and all that, but first thing's first.")
-        +header("Work History")
-        +job("Say Media/VideoEgg",
-        "Oct 2009","Present",
-        "Lead Engineer",
-        "Pioneered the creation and maintenance of many internal tools, boosting user productivity 300%. " +
-            "Produced extensible ad framework in Actionscript allowing for higher-dollar sales. Lead a team " +
-            "of four and consistently delivered products on schedule while innovating new ideas constantly. " +
-            "Developed, documented, and evangelized best practices where none existed. Pioneered the adoption " +
-            "of HTML5 and provided best practice recommendations both internally and for customers.")
-        +job("EVEO, Inc.",
-        "Feb 2008",
-        "Oct 2009",
-        "Senior Developer",
-        "Aided in the conceptualization and execution of all facets of Flash and Flex development. Aided as " +
-            "many as 8 people working on diverse projects. Developed good practice and process improvements " +
-            "for a growing company. Met deadlines and consistently produced accurate estimates.")
-        +job("WordsWorth Desktop Publishing",
-        "Jan 2002","Dec 2008",
-        "Founder/Owner",
-        "Oversaw and aided in the creation of new websites, newsletters, brochures, graphics, manuals, and " +
-            "more. Managed up to five people at once to produce consistent, well-organized data for websites " +
-            "and manuals.")
-        +job("The Pickleball Store",
-        "Mar 2006","Dec 2011",
-        "Founder",
-        "Conceived, sourced funding for, and built an online store in a niche market. Monitored stock levels, " +
-            "profit margins, and budgets while increasing sales 200% per year until sold in 2011.")
-		+header("Languages Known") 
-		+columns(9, ["node.js", "javascript", "jQuery", "CSS", "HTML", "AS2", "AS3", "Python", "PHP", "MYSQL", "MXML", "JSFL"])
-		+header("Programs Known") 
-		+columns(5, ["Adobe Photoshop", "Adobe Flash", "Adobe Illustrator", "Eclipse", "MS Office", "IntelliJ Idea", "OSX", "Windows", "Linux/LAMP", "MYSQL", "MXML", "JSFL"])
 	);
 	
-})()
+})();
